@@ -1,0 +1,89 @@
+{% extends 'school/adminbase.html' %}
+{% block content %}
+<head>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 8px;
+    }
+  </style>
+
+</head>
+<div class="container">
+  <div class="row">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Students</h6>
+
+      </div>
+
+      <table class="table table-hover table-striped table-bordered" id="dev-table">
+        <thead>
+
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Class</th>
+            <th>Roll No</th>
+            <th>Mobile No</th>
+            <th>Book Title</th>
+            <th>Book Borrow Date</th>
+            <th>Book Return Date</th>
+            <th>Book Due Date</th>
+            <th>Students Fees</th>
+            <th>Fees Paid Date</th>
+            <th>Fees Due Date</th>
+            <th>Payment Method</th>
+            <th>Remark</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% for s in students %}
+        <tr>
+          <td>{{s.get_name}}</td>
+          <td>{{s.username}}</td>
+          <td>{{s.cl}}</td>
+          <td>{{s.roll_no}}</td>
+          <td>{{s.mobile}}</td>
+          <td>{{s.book_title}}</td>
+          <td>{{s.book_borrow_date}}</td>
+          <td>{{s.return_date}}</td>
+          <td>{{s.bookdue_date}}</td>
+          <td>{{s.student_fees}}</td>
+          <td>{{s.date_paid}}</td>
+          <td>{{s.pay_duedate}}</td>
+          <td>{{s.payment_method}}</td>
+          <td>{{s.remark}}</td>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'update-student1' s.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
+         <a class="btn btn-danger btn-xs" onclick="return confirmDelete();" href="{% url 'delete-student-from-school' s.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+
+  </div>
+</div>
+<!--javascript--->
+<script>
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this student?");
+}
+</script>
+
+
+{% endblock content %}
